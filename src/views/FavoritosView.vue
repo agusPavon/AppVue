@@ -49,12 +49,39 @@
       </li>
     </ul>
   </div>
+  <div
+    v-if="mostrarMensaje"
+    style="
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      transition: opacity 0.3s;
+    "
+  >
+    {{ mensaje }}
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onActivated } from 'vue'
 
 const favoritos = ref([])
+const mensaje = ref('')
+const mostrarMensaje = ref(false)
+
+const mostrarCartel = (texto) => {
+  mensaje.value = texto
+  mostrarMensaje.value = true
+  setTimeout(() => {
+    mostrarMensaje.value = false
+  }, 2000) // se oculta después de 2 segundos
+}
 
 const cargarFavoritos = () => {
   favoritos.value = JSON.parse(localStorage.getItem('favoritos') || '[]')
@@ -64,6 +91,7 @@ const quitarFavorito = (id) => {
   const actualizados = favoritos.value.filter((p) => p.id !== id)
   localStorage.setItem('favoritos', JSON.stringify(actualizados))
   favoritos.value = actualizados
+  mostrarCartel('Película quitada de favoritos')
 }
 
 onMounted(cargarFavoritos)
