@@ -41,20 +41,22 @@
 <script setup>
 import { ref, computed, onActivated } from 'vue'
 import { useRoute } from 'vue-router'
-const mensaje = ref('')
-const mostrarMensaje = ref(false)
 
-const mostrarCartel = (texto) => {
-  mensaje.value = texto
-  mostrarMensaje.value = true
-  setTimeout(() => {
-    mostrarMensaje.value = false
-  }, 2000) // se oculta después de 2 segundos
-}
 const route = useRoute()
 const apiKey = '44c94fabce903f582afb893ecf60bcd8'
 const pelicula = ref(null)
 const esFavorita = ref(false)
+const mensaje = ref('')
+const mostrarMensaje = ref(false)
+
+const mostrarToast = (texto) => {
+  mensaje.value = texto
+  mostrarMensaje.value = true
+
+  setTimeout(() => {
+    mostrarMensaje.value = false
+  }, 2500) // el mensaje se oculta después de 2.5 segundos
+}
 
 const cargarPelicula = async () => {
   const id = route.params.id
@@ -78,6 +80,7 @@ const toggleFavorito = () => {
     const actualizados = favoritos.filter((p) => p.id !== pelicula.value.id)
     localStorage.setItem('favoritos', JSON.stringify(actualizados))
     esFavorita.value = false
+    mostrarToast('Película quitada de favoritos')
   } else {
     favoritos.push({
       id: pelicula.value.id,
@@ -87,7 +90,7 @@ const toggleFavorito = () => {
     })
     localStorage.setItem('favoritos', JSON.stringify(favoritos))
     esFavorita.value = true
-    mostrarCartel('Película agregada a favoritos')
+    mostrarToast('Película agregada a favoritos')
   }
 }
 
