@@ -41,7 +41,16 @@
 <script setup>
 import { ref, computed, onActivated } from 'vue'
 import { useRoute } from 'vue-router'
+const mensaje = ref('')
+const mostrarMensaje = ref(false)
 
+const mostrarCartel = (texto) => {
+  mensaje.value = texto
+  mostrarMensaje.value = true
+  setTimeout(() => {
+    mostrarMensaje.value = false
+  }, 2000) // se oculta después de 2 segundos
+}
 const route = useRoute()
 const apiKey = '44c94fabce903f582afb893ecf60bcd8'
 const pelicula = ref(null)
@@ -78,6 +87,7 @@ const toggleFavorito = () => {
     })
     localStorage.setItem('favoritos', JSON.stringify(favoritos))
     esFavorita.value = true
+    mostrarCartel('Película agregada a favoritos')
   }
 }
 
