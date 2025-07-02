@@ -1,0 +1,30 @@
+@import 'base.css';
+
+body {
+  align-items: center;
+}
+.lista-peliculas {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile: 1 por fila */
+  gap: 16px;
+  padding: 1rem;
+  justify-items: center;
+}
+
+/* Tablets (mínimo 768px): 3 por fila */
+@media (min-width: 768px) {
+  .lista-peliculas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop (mínimo 1200px): 5 por fila */
+@media (min-width: 1200px) {
+  .lista-peliculas {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+*a {
+  color: rgb(189, 62, 100);
+}

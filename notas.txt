@@ -1,0 +1,11 @@
+git init
+git remote add origin https://github.com/victor-villafane/DWM3AP-Vue.git
+git branch -M main
+git add .
+git commit -m "init"
+git config --global user.email "su_mail@davinci"
+git config --global user.name "username"
+git commit -m "init"
+git push -u origin main
+
+quedo todo en https://github.com/victor-villafane/DWM3AP-Vue
