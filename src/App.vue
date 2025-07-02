@@ -20,6 +20,23 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/favoritos">Favoritos</RouterLink>
       </nav>
     </div>
+    <div
+      v-if="mostrarMensaje"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        transition: opacity 0.3s ease;
+      "
+    >
+      {{ mensaje }}
+    </div>
   </header>
 
   <RouterView v-slot="{ Component }">
